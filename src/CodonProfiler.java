@@ -13,21 +13,22 @@ public class CodonProfiler {
 	 * strand. 
 	 */
 	public int[] getCodonProfile(IDnaStrand strand, String[] codons) {
-		HashMap<String,Integer> map = new HashMap<>();
-		for (int i = 0 ; i < codons.length ; i++) {
-			int start = 0;
-			map.put(codons[i], 0);
-			while (strand.toString().indexOf(codons[i], start) >= 0 && strand.toString().indexOf(codons[i], start)%3 == 0) {
-				map.put(codons[i], map.get(codons[i]) + 1);
-				start = strand.toString().indexOf(codons[i], start) + codons[i].length();
-			}
-		}
-		int[] ret = new int[codons.length];
-		for (int i = 0; i < codons.length ; i++) {
-			ret[i] = map.get(codons[i]);
-		}
-		System.out.print(map.values());
-		return ret;
+//		HashMap<String,Integer> map = new HashMap<>();
+//		for (int i = 0 ; i < codons.length ; i++) {
+//			int start = 0;
+//			map.put(codons[i], 0);
+//			while (strand.toString().indexOf(codons[i], start) >= 0 && strand.toString().indexOf(codons[i], start)%3 == 0) {
+//				map.put(codons[i], map.get(codons[i]) + 1);
+//				start = strand.toString().indexOf(codons[i], start) + codons[i].length();
+//			}
+//		}
+//		int[] ret = new int[codons.length];
+//		for (int i = 0; i < codons.length ; i++) {
+//			ret[i] = map.get(codons[i]);
+//		}
+//		System.out.print(map.values());
+//		return ret;
+		
 //		HashMap<String,Integer> map = new HashMap<>();
 //		int[] ret = new int[codons.length];
 //				
@@ -50,5 +51,18 @@ public class CodonProfiler {
 //			}
 //		}
 //		return ret;
+		HashMap<String,Integer> map = new HashMap<>();
+		int[] ret = new int[codons.length];
+		
+		for (int i=0 ; i < codons.length; i= i+3) {
+			if (! map.containsKey(strand.toString().substring(i, i+3))) {
+				map.put(strand.toString().substring(i, i+3), 0);
+			}
+			map.put(strand.toString().substring(i, i+3), map.get(strand.toString().substring(i, i+3)) + 1);
+		}
+		for (int i = 0; i < codons.length ; i++) {
+			ret[i] = map.get(codons[i]);
+		}
+		return ret;
 	}
 }

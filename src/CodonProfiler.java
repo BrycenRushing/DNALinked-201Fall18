@@ -54,7 +54,7 @@ public class CodonProfiler {
 		HashMap<String,Integer> map = new HashMap<>();
 		int[] ret = new int[codons.length];
 		
-		for (int i = 0 ; i < strand.toString().length(); i= i+3) {
+		for (int i = 0 ; i < strand.toString().length()-2; i= i+3) {
 			if (! map.containsKey(strand.toString().substring(i, i+3))) {
 				map.put(strand.toString().substring(i, i+3), 0);
 			}

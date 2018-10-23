@@ -68,10 +68,4 @@ public class CodonProfiler {
 		}
 		return ret;
 	}
-//	public static void main(String[] args) {
-//		LinkStrand bla = new LinkStrand("cgacgacgatagtagtagtagcgacgacgacga");
-//		String[] codons = {"cga", "gat","tag"};
-//		int[] Ans = getCodonProfile(bla ,codons);
-//		System.out.print(Ans.toString());
-//	}
 }

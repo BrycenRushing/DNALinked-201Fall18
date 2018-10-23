@@ -89,7 +89,7 @@ public class LinkStrand implements IDnaStrand {
 
 	@Override
 	 public char charAt(int index) {
-		if (this.size() < index) {
+		if (this.size() <= index) {
 			throw new IndexOutOfBoundsException();
 		}
 		if (index < myIndex) {
@@ -108,11 +108,5 @@ public class LinkStrand implements IDnaStrand {
 		myIndex = index;
 		return myCurrent.info.charAt(myLocalIndex);
 		}
-	public static void main(String[] args) {
-		LinkStrand bla = new LinkStrand("cgagggttttdc");
-		bla.append("bgthhhck");
-		IDnaStrand blah = bla.reverse();
-		System.out.print(blah.toString());
-	}
 }
 

@@ -49,6 +49,6 @@ public class CodonProfiler {
 //				}
 //			}
 //		}
-		return ret;
+//		return ret;
 	}
 }

@@ -78,6 +78,7 @@ public class LinkStrand implements IDnaStrand {
 			prev = ss.myFirst;
 			curr = curr.next;
 		}
+		ss.mySize = this.mySize;
 		return ss;
 	}
 
@@ -107,5 +108,11 @@ public class LinkStrand implements IDnaStrand {
 		myIndex = index;
 		return myCurrent.info.charAt(myLocalIndex);
 		}
+	public static void main(String[] args) {
+		LinkStrand bla = new LinkStrand("cgagggttttdc");
+		bla.append("bgthhhck");
+		IDnaStrand blah = bla.reverse();
+		System.out.print(blah.toString());
+	}
 }
 

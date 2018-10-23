@@ -54,15 +54,24 @@ public class CodonProfiler {
 		HashMap<String,Integer> map = new HashMap<>();
 		int[] ret = new int[codons.length];
 		
-		for (int i=0 ; i < codons.length; i= i+3) {
+		for (int i = 0 ; i < strand.toString().length(); i= i+3) {
 			if (! map.containsKey(strand.toString().substring(i, i+3))) {
 				map.put(strand.toString().substring(i, i+3), 0);
 			}
 			map.put(strand.toString().substring(i, i+3), map.get(strand.toString().substring(i, i+3)) + 1);
 		}
 		for (int i = 0; i < codons.length ; i++) {
-			ret[i] = map.get(codons[i]);
+			if (map.containsKey(codons[i])) {
+				ret[i] = map.get(codons[i]);
+			}
+			else {ret[i] = 0;}
 		}
 		return ret;
 	}
+//	public static void main(String[] args) {
+//		LinkStrand bla = new LinkStrand("cgacgacgatagtagtagtagcgacgacgacga");
+//		String[] codons = {"cga", "gat","tag"};
+//		int[] Ans = getCodonProfile(bla ,codons);
+//		System.out.print(Ans.toString());
+//	}
 }

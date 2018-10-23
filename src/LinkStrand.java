@@ -9,7 +9,6 @@ public class LinkStrand implements IDnaStrand {
 	      	next = null;
 	   	}
 	}
-	
 	private Node myFirst,myLast;
 	private long mySize;
 	private int myAppends;

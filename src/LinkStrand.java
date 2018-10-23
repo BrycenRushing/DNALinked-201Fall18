@@ -67,7 +67,7 @@ public class LinkStrand implements IDnaStrand {
 
 	@Override
 	public IDnaStrand reverse() {
-		LinkStrand ss = this;
+		LinkStrand ss = new LinkStrand();
 		Node curr = this.myFirst;
 		Node prev = null;
 		while (curr != null) {

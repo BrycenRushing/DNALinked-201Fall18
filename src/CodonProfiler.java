@@ -13,20 +13,42 @@ public class CodonProfiler {
 	 * strand. 
 	 */
 	public int[] getCodonProfile(IDnaStrand strand, String[] codons) {
+//		HashMap<String,Integer> map = new HashMap<>();
+//		for (int i = 0 ; i < codons.length ; i++) {
+//			int start = 0;
+//			map.put(codons[i], 0);
+//			while (strand.toString().indexOf(codons[i], start) >= 0 && strand.toString().indexOf(codons[i], start)%3 == 0) {
+//				map.put(codons[i], map.get(codons[i]) + 1);
+//				start = strand.toString().indexOf(codons[i], start) + codons[i].length();
+//			}
+//		}
+//		int[] ret = new int[codons.length];
+//		for (int i = 0; i < codons.length ; i++) {
+//			ret[i] = map.get(codons[i]);
+//		}
+//		System.out.print(map.values());
+//		return ret;
 		HashMap<String,Integer> map = new HashMap<>();
-		for (int i = 0 ; i < codons.length ; i++) {
-			int start = 0;
-			map.put(codons[i], 0);
-			while (strand.toString().indexOf(codons[i], start) >= 0 && strand.toString().indexOf(codons[i], start)%3 == 0) {
-				map.put(codons[i], map.get(codons[i]) + 1);
-				start = strand.toString().indexOf(codons[i], start) + codons[i].length();
+		int[] ret = new int[codons.length];
+				
+		for(int k=0; k < codons.length; k++) {
+			Iterator<Character> iter = strand.iterator();
+			while (iter.hasNext()) {
+				char a = iter.next();
+				char b = 'z';           // not part of any real codon
+				char c = 'z';
+				if (iter.hasNext()) {
+					b = iter.next();
+				}
+				if (iter.hasNext()) {
+					c = iter.next();
+				}
+				String cod = ""+a+b+c;
+				if (cod.equals(codons[k])) {
+					ret[k] += 1;
+				}
 			}
 		}
-		int[] ret = new int[codons.length];
-		for (int i = 0; i < codons.length ; i++) {
-			ret[i] = map.get(codons[i]);
-		}
-		System.out.print(map.values());
 		return ret;
 	}
 }

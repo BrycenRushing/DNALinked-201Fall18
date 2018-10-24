@@ -9,6 +9,7 @@ public class LinkStrand implements IDnaStrand {
 	      	next = null;
 	   	}
 	}
+	
 	private Node myFirst,myLast;
 	private long mySize;
 	private int myAppends;
@@ -89,7 +90,7 @@ public class LinkStrand implements IDnaStrand {
 
 	@Override
 	 public char charAt(int index) {
-		if (this.size() <= index) {
+		if (index > this.mySize) {
 			throw new IndexOutOfBoundsException();
 		}
 		if (index < myIndex) {

@@ -1,9 +1,108 @@
-Your Name here
-Your NetID here
-Your Partner's name here (or erase)
-Your Partner's NetID here (or erase)
+Brycen Rushing
+bcr16
 
-Questions here will come from the assignment
-writeup. Be sure to copy paste questions and 
-your explanations before you push to GitHub and
-do that before uploading to Gradescope
+dna length = 4,639,221
+cutting at enzyme gaattc
+-----
+Class	                splicee	      recomb	time	appends
+-----
+StringStrand:	            256	      4,800,471	1.495	1290
+StringStrand:	            512	      4,965,591	1.114	1290
+StringStrand:	          1,024	      5,295,831	1.170	1290
+StringStrand:	          2,048	      5,956,311	1.561	1290
+StringStrand:	          4,096	      7,277,271	1.743	1290
+StringStrand:	          8,192	      9,919,191	2.161	1290
+StringStrand:	         16,384	     15,203,031	3.380	1290
+StringStrand:	         32,768	     25,770,711	5.839	1290
+StringStrand:	         65,536	     46,906,071	10.251	1290
+StringStrand:	        131,072	     89,176,791	19.419	1290
+StringStrand:	        262,144	    173,718,231	36.701	1290
+
+dna length = 4,639,221
+cutting at enzyme gaattc
+-----
+Class	                        splicee	         recomb	 time	appends
+-----
+StringBuilderStrand:	            256	      4,800,471	0.043	1290
+StringBuilderStrand:	            512	      4,965,591	0.032	1290
+StringBuilderStrand:	          1,024	      5,295,831	0.016	1290
+StringBuilderStrand:	          2,048	      5,956,311	0.013	1290
+StringBuilderStrand:	          4,096	      7,277,271	0.014	1290
+StringBuilderStrand:	          8,192	      9,919,191	0.017	1290
+StringBuilderStrand:	         16,384	     15,203,031	0.019	1290
+StringBuilderStrand:	         32,768	     25,770,711	0.053	1290
+StringBuilderStrand:	         65,536	     46,906,071	0.095	1290
+StringBuilderStrand:	        131,072	     89,176,791	0.201	1290
+StringBuilderStrand:	        262,144	    173,718,231	0.279	1290
+
+dna length = 4,639,221
+cutting at enzyme gaattc
+-----
+Class	            splicee	      recomb	time	appends
+-----
+LinkStrand:	            256	      4,800,471	0.028	1290
+LinkStrand:	            512	      4,965,591	0.024	1290
+LinkStrand:	          1,024	      5,295,831	0.010	1290
+LinkStrand:	          2,048	      5,956,311	0.020	1290
+LinkStrand:	          4,096	      7,277,271	0.010	1290
+LinkStrand:	          8,192	      9,919,191	0.033	1290
+LinkStrand:	         16,384	     15,203,031	0.012	1290
+LinkStrand:	         32,768	     25,770,711	0.016	1290
+LinkStrand:	         65,536	     46,906,071	0.011	1290
+LinkStrand:	        131,072	     89,176,791	0.006	1290
+LinkStrand:	        262,144	    173,718,231	0.030	1290
+LinkStrand:	        524,288	    342,801,111	0.005	1290
+LinkStrand:	      1,048,576	    680,966,871	0.006	1290
+LinkStrand:	      2,097,152	  1,357,298,391	0.022	1290
+LinkStrand:	      4,194,304	  2,709,961,431	0.006	1290
+LinkStrand:	      8,388,608	  5,415,287,511	0.007	1290
+LinkStrand:	     16,777,216	 10,825,939,671	0.005	1290
+LinkStrand:	     33,554,432	 21,647,243,991	0.013	1290
+LinkStrand:	     67,108,864	 43,289,852,631	0.008	1290
+LinkStrand:	    134,217,728	 86,575,069,911	0.016	1290
+LinkStrand:	    268,435,456	173,145,504,471	0.014	1290
+
+Question 1: are the benchmark timings for StringStrand consistent with 
+the explanation below that the time to execute cutAndSplice is O(b2S)? 
+
+Yes. Because StringStrand is using String the run time of splicing one 
+String BS. Since you have to do this B times the runtime becomes B^2S. 
+Once you take into account the way the string has to go through the whole
+length of the DNA strand this becomes B^2S + N. This is supported in the
+data because B is kept constant. The only thing changed is S. When S is
+doubled the time also just about doubled. This is clearly seen during the 
+splicees of size 16,384. When this was doubled to 32,768 the time also doubled
+this relationship continues until no more memory is available. This relationship
+can't be seen as clearly early on in the data most likely due to the +N. At these
+small splicee sizes the effect of the +N would be more pronounced.
+
+Question 2: are the benchmark timings for StringBuilderStrand consistent 
+with the explanation below that the time to execute cutAndSplice is O(bS)? 
+
+Yes. Similar to question 1 b is maintained constant throughout the benchmark. As 
+a result the change we see in time is due to the change in the splicee size(S).
+This can be seen clearly in the latter data points where as splicee size is doubled
+runtime is doubled as well. This is most evident in the later splicee sizes for the 
+same reason as in question 1. The run times are overall faster because B < B^2. This 
+adds up with what the benchmark results are.
+
+Question 3: Explain why the time for LinkStrand does not change much at all 
+over all the runs in the benchmark program. Explain why you think memory is 
+exhausted at the specific strand size you see in your timings -- as compared 
+to exhaustion for String and StringBuilder.
+
+Link Strand has a runtime of O(B+N). This is because the Splicee node is only 
+made once, and all nodes being replaced simply get pointed to that same Splicee
+node. This means the runtime is only dependent on going through the whole DNA 
+strand and the number of breaks. Hence the O(B+N) runtime. This means the times
+returned by the benchmark should all be pretty similar, which is what happened.
+
+In both StringStrand and StringBuilderStrand B String/StringBuilders of size S 
+are stored as well as the initial DNA strand of length N. This means both use a 
+memory of B*S + N. LinkStrand uses only one node of length S aswell as the original 
+DNA strand. This means its memory is S + N. This means the memory being used around 
+the termination point of StringStrand assuming N to be un-substantial would be 
+1290*262,144(B*S). Which is about 338,165,760 total memory allocated. This means that 
+LinkStrand should run out of memory at some point around a Splicee length of 338,165760
+This number is in-between 268,435,456 and 536,870,912. So LinkStrand should have 
+run out of memory after splicee length of 268,435,456. Which is exactly what happened.

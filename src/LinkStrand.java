@@ -1,6 +1,11 @@
 
 public class LinkStrand implements IDnaStrand {
 	
+	/**
+	 * Creates Node Class
+	 * @author brycenrushing
+	 *
+	 */
 	private class Node{
 		String info;
 	   	Node next;
@@ -17,14 +22,25 @@ public class LinkStrand implements IDnaStrand {
 	private int myLocalIndex;
 	private Node myCurrent;
 	
+	/**
+	 * Constructs a LinkStrand object.
+	 */
 	public LinkStrand() {
 		this("");
 	}
 	
+	/**
+	 * Constructs a LinkStrand using method 
+	 * initialize with initial node with info s
+	 * @param s
+	 */
 	public LinkStrand(String s) {
 		initialize(s);
 	}
 	
+	/**
+	 * Initializes the information for the LinkStrand
+	 */
 	@Override
 	public void initialize(String source) {
 		mySize = source.length();
@@ -36,11 +52,17 @@ public class LinkStrand implements IDnaStrand {
 		myCurrent = myFirst;
 	}
 	
+	/**
+	 * returns the size of the LinkStrand
+	 */
 	@Override
 	public long size() {
 		return mySize;
 	}
 
+	/** 
+	 * Converts the LinkStrand to a string
+	 */
 	@Override
 	public String toString() {
 		Node list = myFirst;
@@ -52,11 +74,19 @@ public class LinkStrand implements IDnaStrand {
 		return dnaString.toString();
 	}
 
+	/**
+	 * Returns a new LinkStrand
+	 * @param source is the info in the node
+	 */
 	@Override
 	public IDnaStrand getInstance(String source) {
 		return new LinkStrand(source);
 	}
 
+	/**
+	 * Appends a new Node to the ListStrand
+	 * @param dna is the info in the appended node
+	 */
 	@Override
 	public IDnaStrand append(String dna) {
 		myLast.next = new Node(dna);
@@ -66,6 +96,9 @@ public class LinkStrand implements IDnaStrand {
 		return this;
 	}
 
+	/**
+	 * Reverses the nodes and info in the nodes of the LinkStrand
+	 */
 	@Override
 	public IDnaStrand reverse() {
 		LinkStrand ss = new LinkStrand();
@@ -83,11 +116,18 @@ public class LinkStrand implements IDnaStrand {
 		return ss;
 	}
 
+	/**
+	 * Returns the number of appends the LinkStrand has undergone
+	 */
 	@Override
 	public int getAppendCount() {
 		return myAppends;
 	}
 
+	/**
+	 * Finds the character at the index
+	 * @param index is the index of the character
+	 */
 	@Override
 	 public char charAt(int index) {
 		if (index > this.mySize) {
